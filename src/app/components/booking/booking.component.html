@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Flight Booking and Cancellation</h1>
+
+    <section id="booking-section">
+        <h2>Book a Flight</h2>
+        <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+
+            <label for="flight-number">Flight Number:</label>
+            <input type="text" name="flight-number" ngModel required>
+
+            <label for="passenger-name">Passenger Name:</label>
+            <input type="text" name="passenger-name" ngModel required>
+
+            <label for="seat-number">Seat Number:</label>
+            <input type="text" name="seat-number" [ngModel]="selectedSeats.join(', ')" readonly class="form-control"
+                required />
+            <div class="seats-container">
+                <div class="row" *ngFor="let row of seatRows">
+                    <div class="seat" *ngFor="let seat of row" [class.selected]="isSelected(seat)"
+                        (click)="toggleSeat(seat)">
+                        {{ seat }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="selected-seats mt-2">
+                <strong>Selected Seats:</strong> {{ selectedSeats.join(', ') || 'None' }}
+            </div>
+
+            <button type="submit" [disabled]="!userForm.valid">Book Ticket</button>
+        </form>
+    </section>
+
+    <div id="message"></div>
+</div>
