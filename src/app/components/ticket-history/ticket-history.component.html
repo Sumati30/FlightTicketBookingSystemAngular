@@ -1,0 +1,35 @@
+<div class="container">
+    <section>
+        <button routerLink="/home">Home</button>
+    </section>
+    <section id="ticket-history-section">
+        <h2>Ticket History</h2>
+        <p>Here you can view your past flight bookings and cancellations. Please select flight to view Bookings! </p>
+        <div>
+            <label for="flight-select">Select Flight:</label>
+            <select name="flight-select" [(ngModel)]="selectedFlight">
+                <option *ngFor="let flight of flights" [value]="flight">{{ flight }}</option>
+            </select>
+        </div>
+        <button (click)="loadTicketHistory()">Load History</button>
+        
+        <div *ngIf="ticketHistory.length > 0">
+            <ul>
+                <li *ngFor="let ticket of ticketHistory">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>Ticket ID: {{ ticket.bookingId }}</h3>
+                            <p>Flight Number: {{ ticket.flightNumber }}</p>
+                            <p>Passenger Name: {{ ticket.username }}</p>
+                            <p>Seat Number: {{ ticket.seatNumber }}</p>
+                           
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="ticketHistory.length === 0">
+            <p>No ticket history available.</p>
+        </div>
+    </section>
+</div>

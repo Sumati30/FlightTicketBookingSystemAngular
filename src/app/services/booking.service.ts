@@ -18,4 +18,25 @@ export class BookingService {
     }
     return this.http.post("http://localhost:8080/flight/reserve", params, { responseType: 'text' });
   }
+
+  cancelBooking(bookingId: string) {
+    // Logic to cancel a booking
+    console.log(`Cancelling booking with ID ${bookingId}`);
+
+    return this.http.delete(`http://localhost:8080/flight/cancel/${bookingId}`, { responseType: 'text' });
+  }
+
+  fetchAvailableFlights(){
+    // Logic to fetch available flights
+    console.log('Fetching available flights');
+
+    return this.http.get("http://localhost:8080/flight/available");
+  }
+
+  fetchFlightBookings(flightNumber: string) {
+    // Logic to fetch flight bookings
+    console.log(`Fetching bookings for flight ${flightNumber}`);
+
+    return this.http.get(`http://localhost:8080/flight/booking-history/${flightNumber}`);
+  }
 }

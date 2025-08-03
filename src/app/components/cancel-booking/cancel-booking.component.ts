@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingService } from '../../services/booking.service';
 
 @Component({
   selector: 'app-cancel-booking',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CancelBookingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bookingService:BookingService) { }
 
   ngOnInit(): void {
   }
 
+
+  onCancel(form){
+    console.log(form.value);  // { bookingId: '...' }    
+
+    this.bookingService.cancelBooking(form.value['ticket-id']).subscribe({
+      next: (response) => {
+        console.log('Cancellation successful:', response);
+        form.resetForm(); 
+      },
+      error: (error) => {
+        console.error('Cancellation failed:', error);
+      }
+    });      
+  }
 }

@@ -1,14 +1,21 @@
 <div class="container">
+    <section>
+        <!-- <button routerLink="/booking">Back to Booking</button> -->
+        <button routerLink="/home">Home</button>
+    </section>
     <section id="cancellation-section">
-        <h2>Cancel a Flight</h2>
-        <form id="cancellation-form">
-            <label for="cancellation-flight-number">Flight Number:</label>
-            <input type="text" id="cancellation-flight-number" required>
-
+        <h2>Cancel a Flight Booking</h2>
+        <div>
+            <p> Please provide your Ticket Booking Id for cancellation</p>
+        </div>
+        <form #cancellationForm="ngForm" (ngSubmit)="onCancel(cancellationForm)">
+            <label for="ticket-id">Ticket Number:</label>
+            <input type="text" name="ticket-id" ngModel required>
+<!-- 
             <label for="cancellation-passenger-name">Seat Number:</label>
-            <input type="text" id="cancellation-passenger-name" required>
+            <input type="text" id="cancellation-passenger-name" required> -->
 
-            <button type="submit">Cancel Ticket</button>
+            <button type="submit" [disabled]="!cancellationForm.valid">Cancel Ticket</button>
         </form>
     </section>
 </div>
